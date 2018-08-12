@@ -1,0 +1,34 @@
+{
+  "name": "logistics-fee-calculator",
+  "version": "1.0.0",
+  "description": "This application calculates the distance between two locations and displays an estimated logistics fee.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vynessa/logistics-fee-calculator.git"
+  },
+  "keywords": [
+    "logisticfee",
+    "react",
+    "system",
+    "learning",
+    "solution",
+    "api",
+    "node.js",
+    "express",
+    "webpack",
+    "ecmascript6",
+    "SASS",
+    "google maps",
+    "distance calculator"
+  ],
+  "author": "Vanessa Ejikeme",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vynessa/logistics-fee-calculator/issues"
+  },
+  "homepage": "https://github.com/vynessa/logistics-fee-calculator#readme"
+}
