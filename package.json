@@ -1,0 +1,58 @@
+{
+  "name": "logistics-fee-calculator",
+  "version": "1.0.0",
+  "description": "This application calculates the distance between two locations and displays an estimated logistics fee.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "webpack-dev-server --mode development --config webpack.config.js --open --content-base src/",
+    "build": "webpack --mode production",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vynessa/logistics-fee-calculator.git"
+  },
+  "keywords": [
+    "logisticfee",
+    "react",
+    "system",
+    "learning",
+    "solution",
+    "api",
+    "node.js",
+    "express",
+    "webpack",
+    "ecmascript6",
+    "SASS",
+    "google maps",
+    "distance calculator"
+  ],
+  "author": "Vanessa Ejikeme",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vynessa/logistics-fee-calculator/issues"
+  },
+  "homepage": "https://github.com/vynessa/logistics-fee-calculator#readme",
+  "devDependencies": {
+    "babel-eslint": "^8.2.6",
+    "dotenv": "^6.0.0",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "webpack": "^4.16.5",
+    "webpack-cli": "^3.1.0",
+    "webpack-dev-server": "^3.1.5"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "css-loader": "^1.0.0",
+    "html-webpack-plugin": "^3.2.0",
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2",
+    "react-router": "^4.3.1",
+    "sass-loader": "^7.1.0"
+  }
+}
