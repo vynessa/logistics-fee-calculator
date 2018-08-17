@@ -13,14 +13,15 @@
 
     <!-- Materialize Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
+    <script>
+      const apiKey = `https://maps.googleapis.com/maps/api/js?key=${process.env.MAPS_API_KEY}&libraries=places`
+      document.write("<script type='text/javascript' src='"+ apiKey + "'><\/scr" + "ipt>");
+    </script>
   </head>
 
   <!-- Body section -->
   <body>
     <!--Main App-->
-    <div id="app"></div>
-
-    <!--External Javascript Files-->		
-    <script src="https://maps.googleapis.com/maps/api/js?key=<%=>" async defer></script>
+    <div id="app"></div>    
   </body>
 </html>
