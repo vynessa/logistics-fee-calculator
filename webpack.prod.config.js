@@ -1,8 +1,9 @@
-require('dotenv').config();
+// require('dotenv').config();
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 const config = {
   devtool: 'eval-source-map',
@@ -13,7 +14,7 @@ const config = {
     publicPath: '/build/'
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /.(js|jsx)$/,
         loader: 'babel-loader',
@@ -37,6 +38,17 @@ const config = {
           use: ['css-loader', 'sass-loader'],
         })
       }
+    ],
+  },
+  optimization: {
+    minimizer: [
+      new UglifyJsPlugin({
+        uglifyOptions: {
+          output: {
+            comments: false
+          }
+        }
+      })
     ]
   },
   plugins: [
@@ -49,30 +61,16 @@ const config = {
       filename: 'app.css',
       allChunks: true
     }),
-    new webpack.optimize.UglifyJsPlugin({
-      beautify: false,
-      mangle: {
-        screw_ie8: true,
-        keep_fnames: true
-      },
-      compress: {
-        screw_ie8: true
-      },
-      comments: false
-    }),
     new webpack.DefinePlugin({
       'process.env': {
-        NODE_ENV: JSON.stringify('development'),
+        NODE_ENV: JSON.stringify('production'),
         API_KEY: JSON.stringify(process.env.API_KEY),
         SERVICE_ID: JSON.stringify(process.env.SERVICE_ID),
         MAPS_API_KEY: JSON.stringify(process.env.MAPS_API_KEY)
       }
     }),
-    new webpack.LoaderOptionsPlugin({
-      minimize: true,
-      debug: false
-    }),
   ],
+  mode: 'production',
   resolve: {
     extensions: ['.js', '.json', '.jsx', '.scss']
   }

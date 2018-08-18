@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node index.js",
     "dev": "webpack-dev-server --mode development --config webpack.config.js --open --content-base src/",
-    "build": "webpack --mode production --config ./webpack.prod.config.js --progress --colors",
+    "build": "webpack --mode production --config webpack.prod.config.js",
     "heroku-postbuild": "npm run-script build"
   },
   "repository": {
@@ -71,8 +71,8 @@
     "react-router-dom": "^4.3.1",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.22.1",
+    "uglifyjs-webpack-plugin": "^1.3.0",
     "url-loader": "^1.0.1",
-    "webpack": "^4.16.5",
     "webpack-dev-middleware": "^3.1.3",
     "webpack-hot-middleware": "^2.22.3"
   }
