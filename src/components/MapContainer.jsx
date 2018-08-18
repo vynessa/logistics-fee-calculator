@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import '../../public/scss/main.scss';
 import {
-  // withScriptjs,
   withGoogleMap,
   GoogleMap,
   Marker
