@@ -4,9 +4,11 @@
   "description": "This application calculates the distance between two locations and displays an estimated logistics fee.",
   "main": "index.js",
   "scripts": {
+    "build:prod": "webpack --config ./webpack.deployment.config.js --progress --colors",
+    "start": "node index.js",
     "dev": "webpack-dev-server --mode development --config webpack.config.js --open --content-base src/",
     "build": "webpack --mode production",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "heroku-postbuild": "npm run build:prod"
   },
   "repository": {
     "type": "git",
