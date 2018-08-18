@@ -4,10 +4,10 @@ const path = require('path'),
 
 module.exports = {
   app: () => {
-    const indexPath = path.join(__dirname, './dist/index.html');
-    const publicPath = express.static(path.join(__dirname, './dist'));
+    const indexPath = path.join(__dirname, './build/index.html');
+    const publicPath = express.static(path.join(__dirname, './build'));
 
-    app.use('/dist', publicPath);
+    app.use('/build', publicPath);
     app.get('/', (_, res) => { res.sendFile(indexPath); });
     app.all('*', (req, res) => { res.sendFile(indexPath); });
 
