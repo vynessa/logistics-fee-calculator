@@ -1,0 +1,67 @@
+@import 'mixins';
+@import 'variables';
+
+body {
+  font-family: $font-family-base;
+  background-color: $background-off-white;
+  height: 100%;
+  width: 100%
+}
+
+.navbar-brand {
+  font-family: $font-family-logo;
+  text-decoration: none;
+  font-size: 30px;
+  margin: 0;
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px 20px;
+  height: unset;
+}
+
+.form-label {
+  @include form-label()
+}
+
+.actions {
+  margin: 40px 0 40px;
+  width: 100%;
+}
+
+.btn-secondary {
+  @include buttons($palette-yellow, $white)
+}
+
+.section-title {
+  font-size: 32px;
+  color: $black;
+  font-weight: 300;
+  margin: 50px 0 10px;
+  letter-spacing: -1px;
+}
+
+section {
+  div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+
+.container {
+  display: flex;
+}
+
+.map {
+  flex: 1;
+}
+
+.main {
+  flex: 1;
+  width: 100%;
+  max-width: 520px;
+  padding: 20px;
+  background-color: white;
+}

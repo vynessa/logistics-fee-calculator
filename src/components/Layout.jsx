@@ -1,8 +1,8 @@
 import React from 'react';
 import NavBar from './NavBar.jsx';
 import MapContainer from './MapContainer.jsx';
-import PageFooter from './PageFooter.jsx';
 import DeliveryForm from './DeliveryForm.jsx';
+import PageFooter from './PageFooter.jsx';
 
 /**
  * @description Template component to be persistent across the app
@@ -18,9 +18,11 @@ const Layout = () => {
   return (
     <div>
       <NavBar />
-      <MapContainer />
-      <DeliveryForm />
-      <PageFooter/>
+      <section className="container">
+        <MapContainer/>
+        <DeliveryForm />
+      </section>
+      <PageFooter />
     </div>
   );
 };

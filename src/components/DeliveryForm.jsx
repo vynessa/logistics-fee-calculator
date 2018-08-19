@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import {
   Button,
-  Row,
-  Input,
-  Icon
-} from 'react-materialize';
+  Form,
+  FormGroup,
+  Label,
+  Input
+} from 'reactstrap';
 import MaxApi from '../utils/MaxApi';
 
 /**
@@ -15,33 +16,68 @@ class DeliveryForm extends Component {
   /**
    * Creates an instance of DeliveryForm.
    * @memberof DeliveryForm
+   * @param {object} props
    */
   constructor() {
     super();
     this.state = {
+      pickup: '',
+      delivery: '',
+      formValid: false,
       pickupLatLng: {},
       deliveryLatLng: {},
-      estimatedDeliveryFee: 0
+      estimatedDeliveryFee: 0,
+      error: false
     };
-    this.handleInputChange = this.handleInputChange.bind(this);
+
+    this.handleUserInput = this.handleUserInput.bind(this);
     this.getCoordinates = this.getCoordinates.bind(this);
     this.getEstimateDeliveryFee = this.getEstimateDeliveryFee.bind(this);
+    this.validateField = this.validateField.bind(this);
   }
 
   /**
-   * @description Grabs the coordinates for
-   *              origin and destination inputed
-   * @param {object} event
-   * @returns {void}
-   * @memberof DeliveryForm
-   */
-  handleInputChange(event) {
+     * @description Grabs the coordinates for
+     *              origin and destination inputed
+     * @param {object} event
+     * @returns {void}
+     * @memberof DeliveryForm
+     */
+  handleUserInput(event) {
+    const { name, value } = event.target;
+    this.setState(
+      { [name]: value },
+    );
+    this.validateField();
     this.getCoordinates(event.target);
   }
 
+  validateField() {
+    const { pickup, delivery } = this.state;
+
+    if (pickup !== '' && delivery !== '') {
+      this.setState({
+        formValid: true
+      });
+    }
+    return false;
+  }
+
+  /**
+   * @description gets the coordinates for
+   *              origin and destination inputed
+   * @param {object} element
+   * @returns {void}
+   * @memberof DeliveryForm
+   */
   getCoordinates(element) {
     const inputNodes = document.getElementById(element.id);
-    const autoComplete = new window.google.maps.places.Autocomplete(inputNodes);
+    const options = {
+      // types: ['(cities)'],
+      componentRestrictions: { country: 'ng' }
+    };
+
+    const autoComplete = new window.google.maps.places.Autocomplete(inputNodes, options);
 
     autoComplete.addListener('place_changed', () => {
       const place = autoComplete.getPlace();
@@ -51,10 +87,10 @@ class DeliveryForm extends Component {
         [`${element.id}LatLng`]: {
           place_id: place.place_id,
           location: location.toString(),
-          address: place.formatted_address,
           lat: location.lat(),
           lng: location.lng()
-        }
+        },
+        [element.name]: place.formatted_address
       });
     });
   }
@@ -73,46 +109,57 @@ class DeliveryForm extends Component {
       this.setState({
         estimatedDeliveryFee
       });
+    }).catch((error) => {
+      this.setState({ error });
     });
   }
 
+  /**
+   * @description
+   * @returns {JSX.Element} DeliveryForm
+   * @memberof DeliveryForm
+   */
   render() {
     return (
-      <div >
-        <div>
-          <p>Delivery Fee Estimate: N{this.state.estimatedDeliveryFee}</p>
-        </div>
-        <div>
-          <Row >
+      <div className="main">
+        <Form>
+          <FormGroup>
+            <Label
+              className="form-label"
+              for="pickup"
+            >
+              Pickup Location
+            </Label>
             <Input
-              s={6}
               id="pickup"
+              className="form-control"
+              name="pickup"
               placeholder="Enter pickup location"
-              label="Pickup Location"
-              onChange={this.handleInputChange}
-              validate>
-              <Icon>my_location</Icon>
-            </Input>
+              onChange={this.handleUserInput} />
+          </FormGroup>
+          <FormGroup>
+            <Label
+              className="form-label"
+              for="delivery"
+            >
+              Delivery Location
+            </Label>
             <Input
-              s={6}
               id="delivery"
+              className="form-control"
+              name="delivery"
               placeholder="Enter delivery location"
-              label="Delivery Location"
-              onChange={this.handleInputChange}
-              validate>
-              <Icon>location_on</Icon>
-            </Input>
-          </Row>
-        </div>
-        <div>
+              onChange={this.handleUserInput} />
+          </FormGroup>
           <Button
-            className="yellow"
-            waves="light"
+            className="actions"
             onClick={this.getEstimateDeliveryFee}
+            disabled={!this.state.formValid}
           >
-            Get Delivery Price Estimate
+            Get Estimate Fee
           </Button>
-        </div>
+          <span className="form-heading section-title" >Delivery Fee: N{this.state.estimatedDeliveryFee}</span>
+        </Form>
       </div>
     );
   }
